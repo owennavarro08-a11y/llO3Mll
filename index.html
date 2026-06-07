@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LA ULTIMA LLAMADA</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+    <div class="contenedor-buscador">
+        <input type="text" id="input-busqueda" placeholder="Buscar en la página... (ej. corto, elenco, tiktok, comentarios)">
+        <button id="boton-buscar" onclick="ejecutarBusqueda()">Buscar</button>
+    </div>
+
+    <div class="contenedor-letrero">
+    <h1>LA ULTIMA LLAMADA</h1>
+    </div>
+<div id="id-sinopsis">
+        <p class="sinopsis-texto">
+            Este thriller de una producción independiente del cual podemos decir que se les fue el presupuesto contratando a una actriz colombiana para el papel principal, la cual nunca llegó, tiene un toque simple dramático donde muchas veces te dejará en suspenso cada minuto que pase... pero, ¿Y la colombiana?...
+        </p>
+    </div>
+
+<div class="contenedor-cortometraje-link">
+    <a href="#id-cortometraje" class="link-plano">Cortometraje</a>
+</div>
+
+    <img src="LA ULTIMA LLAMADAposter.jpg" alt="Poster Ilustrativo" class="imagen-centrada">
+
+    <div id="id-elenco" class="contenedor-desplegable">
+    <details>
+        <summary>Elenco y producción</summary>
+        <ul class="lista-casillas">
+            <li>Flores Serrano Dana Sofia</li>
+            <li>Garcia Sierra Dulce Ivonn</li>
+            <li>Lopez Ramos Marco Antonio</li>
+            <li>Maldonado Rodriguez Anamile Guadalupe</li>
+            <li>Navarro Hernandez Owen Emmanuel</li>
+            <li>Ortiz Nava Kevin Antuan</li>
+        </ul>
+    </details>
+    </div>
+
+     <div id="id-trailer">
+        <h2 class="subtitulo-trailer">TRÁILER</h2>
+        <div class="contenedor-video">
+            <video controls class="video-local">
+                <source src="CORTOMETRAJE.mp4" type="video/mp4">
+                Tu navegador no soporta la reproducción de este video.
+            </video>
+        </div>
+    </div>
+
+<p class="historia-texto">
+    La historia relata como un grupo de amigos pasa por situaciones conflictivas donde la confianza entre ellos se va desvaneciendo poco a poco llegando a un climax en donde cada quien decide su propio destino teniendo un tragico y sorpresivo final. Porque todo inicio tiene un final... ¿Verdad?
+</p>
+
+ <div id="id-cortometraje" class="contenedor-video-nuevo">
+        <video controls class="video-local">
+            <source src="CORTOMETRAJEFINAL.mp4" type="video/mp4">
+            Tu navegador no soporta este video.
+        </video>
+    </div>
+
+<div id="id-redes">
+        <div class="seccion-tiktok">
+            <p class="texto-tiktok">Apóyanos en TikTok en el siguiente enlace:</p>
+            <a href="https://vt.tiktok.com/ZSxvDFHkY/" target="_blank" class="enlace-tiktok">
+                TikTok 🎬
+            </a>
+            <p class="texto-companeros">
+                En el perfil podrás encontrar proyectos de mis compañeros, ¡todos te lo agradeceríamos!
+            </p>
+        </div>
+    
+<footer class="pie-pagina">
+    <p class="agradecimiento">GRACIAS POR VISITAR NUESTRA PAGINA</p>
+    
+    <div class="creditos-escolares">
+        <p class="obra-titulo">La Última Llamada (6208):</p>
+        <p>Generación 2023-2026</p>
+        <p>Módulo IV Diseño Digital</p>
+        <p>Submodulo 1 Software de Diseño, Capacitación para el Trabajo en Tics, con el apoyo del profesor Luis Eduardo Rivas Flores
+        </p>
+        <p class="hashtag">#CobaehTizayuca</p>
+    </div>
+</footer>
+
+    <div class="contenedor-enlace">
+    <a href="https://youtu.be/0q6g7O0C3hE?si=PWGO6BEJOeS2zqN3" target="_blank" class="enlace-youtube">
+        Lo que nos falto 😢
+    </a>
+    </div>
+<!-- Botón flotante con el ojo y el número -->
+<button id="boton-visitas" class="contador-flotante">
+  👁️ <span id="numero-visitas">0</span>
+</button>
+
+<!-- Lógica de conteo en JavaScript -->
+<script>
+  // Recupera el conteo del almacenamiento local del navegador
+  let visitas = localStorage.getItem('contador_paginas');
+  
+  if (visitas === null) {
+    visitas = 0;
+  }
+  
+  visitas++; // Incrementa 1 visita
+  localStorage.setItem('contador_paginas', visitas); // Guarda el nuevo total
+  
+  // Muestra el número final en la pantalla
+  document.getElementById('numero-visitas').innerText = visitas;
+
+   function ejecutarBusqueda() {
+            const input = document.getElementById('input-busqueda').value.toLowerCase().trim();
+            // Limpiar acentos para evitar fallos de escritura del usuario
+            const termino = input.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+            if (!termino) return;
+
+            // Mapeo de términos alternativos a las secciones específicas de tu proyecto
+            if (['corto', 'cortometraje', 'video', 'pelicula', 'reproducir', 'final'].some(p => termino.includes(p))) {
+                desplazarA('id-cortometraje');
+            } 
+            else if (['trailer', 'adelanto', 'avance'].some(p => termino.includes(p))) {
+                desplazarA('id-trailer');
+            }
+            else if (['sinopsis', 'historia', 'trama', 'de que trata', 'resumen', 'colombiana'].some(p => termino.includes(p))) {
+                desplazarA('id-sinopsis');
+            } 
+            else if (['elenco', 'produccion', 'actores', 'compañeros', 'integrantes', 'alumnos', 'nombres', 'grupo'].some(p => termino.includes(p))) {
+                desplazarA('id-elenco');
+            }
+            else if (['tiktok', 'tik tok', 'youtube', 'redes', 'enlace', 'links', 'apoyanos'].some(p => termino.includes(p))) {
+                desplazarA('id-redes');
+            } 
+            else if (['comentarios', 'opiniones', 'formulario', 'consejos', 'buzon', 'correo', 'enviar', 'feedback'].some(p => termino.includes(p))) {
+                desplazarA('id-comentarios');
+            } 
+            else {
+                alert('No se encontraron resultados. Intenta buscando: corto, trailer, elenco, redes o comentarios.');
+            }
+        }
+
+        function desplazarA(idElemento) {
+            const elemento = document.getElementById(idElemento);
+            if (elemento) {
+                elemento.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        // Detectar si el usuario presiona "Enter" en la caja de texto
+        document.getElementById('input-busqueda').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                ejecutarBusqueda();
+            }
+        });
+</script>
+
+<section id="id-comentarios" class="seccion-comentarios">
+  <h2>¡Déjanos tu opinión!</h2>
+  <p class="subtitulo">Tu feedback nos ayuda a mejorar el cortometraje.</p>
+
+  <!-- Formulario conectado a tu correo electrónico -->
+  <form action="https://formsubmit.co" method="POST" class="formulario-opinion">
+    
+    <!-- Configuraciones del servicio de correo -->
+    <input type="hidden" name="_next" value="https://tu-pagina-web.com"> <!-- Opcional: Pon aquí el enlace a donde redirigir después de enviar -->
+    <input type="hidden" name="_subject" value="¡Nueva opinión de tu Cortometraje/Página!">
+    <input type="hidden" name="_captcha" value="false"> <!-- Desactiva el captcha molesto para los usuarios -->
+
+    <!-- Campo: Nombre -->
+    <div class="grupo-campo">
+      <label for="nombre">Nombre o Apodo *</label>
+      <input type="text" id="nombre" name="Nombre" placeholder="Ej. Juan Pérez" required>
+    </div>
+
+    <!-- Campo: Correo (Opcional) -->
+    <div class="grupo-campo">
+      <label for="correo">Correo electrónico <span class="opcional">(Opcional)</span></label>
+      <input type="email" id="correo" name="Correo" placeholder="ejemplo@correo.com">
+    </div>
+
+    <!-- Campo: Opinión -->
+    <div class="grupo-campo">
+      <label for="comentario">¿Qué opinas de la página y el cortometraje? ¿Algún consejo? *</label>
+      <textarea id="comentario" name="Comentario_u_Opinion" rows="5" placeholder="Escribe aquí tu opinión, consejos o sugerencias..." required></textarea>
+    </div>
+
+    <!-- Botón de envío -->
+    <button type="submit" class="boton-enviar">Enviar comentarios</button>
+  </form>
+</section>
+
+</body>
+</html>
